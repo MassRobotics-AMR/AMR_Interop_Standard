@@ -1,0 +1,219 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema#",
+
+  "definitions": {
+    "quaternion": {
+      "description": "Quaternion representation of an angle",
+      "type": "object",
+      "required": ["x", "y", "z", "w"],
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "z": { "type": "number" },
+        "w": { "type": "number" }
+      }
+    },
+    "location": {
+      "description": "Location of an object or AMR",
+      "type": "object",
+      "required": ["x", "y", "z", "angle", "level"],
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "z": { "type": "number" },
+        "angle" : { "$ref": "#/definitions/quaternion" },
+        "level": { "type": "integer" }
+      }
+    }
+  },
+
+  "identityReport": {
+    "type": "object",
+    "required": ["uuid", "timestamp", "manufacturerName", "robotModel", "robotSerialNumber", "baseRobotEnvelope"],
+    "properties": {
+      "uuid": {
+        "description": "UUID specified by RFC4122 that all subsequent messages should reference",
+        "type": "string",
+        "format": "uuid"
+      },
+      "timestamp": { "type": "string", "format": "date-time" },
+      "manufacturerName": { "type": "string" },
+      "robotModel": { "type": "string" },
+      "robotSerialNumber": { 
+        "description": "Unique robot identifier that ideally can be physically linked to the AMR",
+        "type": "string" },
+      "baseRobotEnvelope": { 
+        "description": "Footprint of robot based on orientation - centered on current location.",
+        "type": "object",
+        "required": ["x", "y"],
+        "properties": {
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "z": { "type": "number" }
+        }
+      },
+
+      "maxSpeed": { 
+        "description": "Max robot speed in m/s",
+        "type": "number" 
+      },
+      "maxRunTime": { 
+        "description": "Estimated Runtime in hours",
+        "type": "number"
+      },
+      "emergencyContactInformation": { 
+        "description": "Emergency Contact - preferrably phone number",
+        "type": "string"
+      },
+      "chargerType": { 
+        "description": "Type of charger",
+        "type": "string"
+      },
+      "supportVendorName": { 
+        "description": "Vendor that supplied robot",
+        "type": "string"
+      },
+      "supportVendorContactInformation": { 
+        "description": "Contect information for vendor",
+        "type": "string"
+      },
+      "productDocumentation": { 
+        "description": "Link to product documenation",
+        "type": "string",
+        "format": "uri"
+      },
+      "thumbnailImage": { 
+        "description": "Link to thumbnail graphic stored as PNG",
+        "type": "string",
+        "format": "uri"
+      },      
+      "cargoType": { 
+        "description": "Discription of cargo",
+        "type": "string"
+      },      
+      "cargoMaxVolume": { 
+        "description": "Max volume of cargo in meters",
+        "type": "object",
+        "required": ["x", "y"],
+        "properties": {
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "z": { "type": "number" }
+        }
+      },
+      "cargoMaxWeight": { 
+        "description": "Max weight of cargo in kg",
+        "type": "string"
+      }
+    }
+  },
+
+  "statusReport": {
+    "type": "object",
+    "required": ["uuid", "timestamp", "mode"],
+    "properties": {
+      "uuid": {
+        "description": "UUID specified in the identityAndCapability message",
+        "type": "string",
+        "format": "uuid"
+      },
+      "timestamp": { "type": "string", "format": "date-time" },
+      "mode": { 
+        "description": "Current action the robot is performing",
+        "type": "string",
+        "enum": ["navigating", "idle", "disabled", "offline", "charging", "waiting", "loadingUnloading", "manualOveride"] 
+      },
+      "batteryPercentage" : {
+        "description": "Percentage of battery remaining",
+        "type": "number",
+        "minimum": 0,
+        "inclusiveMaximum": 100
+      },
+      "remainingRunTime" : {
+        "description": "Estimated remaining runtime in hours",
+        "type": "number",
+        "minimum": 0
+      },
+      "loadPercentageStillAvailable" : {
+        "description": "Percentage of capacity still available",
+        "type": "number",
+        "minimum": 0,
+        "inclusiveMaximum": 100
+      }
+    }
+  },
+
+  "locationReport": {
+    "type": "object",
+    "location": { 
+      "required": ["uuid", "timestamp", "location" ],
+      "properties": {
+        "uuid": {
+          "description": "UUID specified in the identityAndCapability message",
+          "type": "string",
+          "format": "uuid"
+        },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "mode": { 
+          "type": "string",
+          "enum": ["navigating", "idle", "disabled", "offline", "charging", "waiting", "loadingUnloading", "manualOveride"] 
+        },
+        "location": { 
+          "description": "Current Location of AMR",
+          "$ref": "#/definitions/location" 
+        }
+      }
+    },
+    "velocity": { 
+      "description": "Current velocity of AMR",
+      "type": "object",
+      "required": ["linear"],
+      "properties": {
+        "linear": { 
+          "description": "Linear veloicty in m/s in heading direction, forward is postive",
+          "type": "number" 
+        },
+        "pitch": { 
+          "description": "Anglular veloicty in rad/s, clockwise is positive",
+          "type": "number" 
+        },
+        "yaw": { 
+          "description": "Anglular veloicty in rad/s, clockwise is positive",
+          "type": "number" 
+        },
+        "roll": { 
+          "description": "Anglular veloicty in rad/s, clockwise is positive",
+          "type": "number"
+        } 
+      }
+    },
+    "destinations" : {
+      "description": "Target destination(s) of AGV",
+      "type": "array",
+      "items": {             
+        "type": "object",
+        "required": ["timestamp", "location"],
+        "properties": {
+          "timestamp": { "type": "string", "format": "date-time" },
+          "location": {"$ref": "#/definitions/location" }
+        }
+      },
+      "maxItems": 10,
+      "uniqueItems": true
+    },
+    "path" : {
+      "description": "Short term path of AGV ~10 sec",
+      "type": "array",
+      "items": {             
+        "type": "object",
+        "required": ["timestamp", "location"],
+        "properties": {        
+          "timestamp": { "type": "string", "format": "date-time" },
+          "location": {"$ref": "#/definitions/location" }
+        }
+      },
+      "maxItems": 10,
+      "uniqueItems": true
+    }
+  }
+}
