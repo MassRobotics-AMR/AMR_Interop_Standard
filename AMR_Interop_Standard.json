@@ -16,13 +16,38 @@
     "location": {
       "description": "Location of an object or AMR",
       "type": "object",
-      "required": ["x", "y", "z", "angle", "level"],
+      "required": ["x", "y", "z", "angle", "planarDatum"],
       "properties": {
         "x": { "type": "number" },
         "y": { "type": "number" },
         "z": { "type": "number" },
         "angle" : { "$ref": "#/definitions/quaternion" },
-        "level": { "type": "integer" }
+        "planarDatum": { 
+          "description": "Id of planarDatum AMR is referencing",
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "predictedLocation": {
+      "description": "Predicted future location of an object or AMR",
+      "type": "object",
+      "required": ["timestamp", "x", "y", "z", "angle"],
+      "properties": {
+        "timestamp": { 
+          "description": "Predicted UTC time AMR will reach this location",
+          "type": "string", 
+          "format": "date-time" 
+        },
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "z": { "type": "number" },
+        "angle" : { "$ref": "#/definitions/quaternion" },
+        "planarDatumUUID": { 
+          "description": "Only necessary if different from AMRs current planarDatum",
+          "type": "string",
+          "format": "uuid"
+        }
       }
     }
   },
@@ -110,7 +135,7 @@
 
   "statusReport": {
     "type": "object",
-    "required": ["uuid", "timestamp", "mode"],
+    "required": ["uuid", "timestamp", "operationalState", "location" ],
     "properties": {
       "uuid": {
         "description": "UUID specified in the identityAndCapability message",
@@ -118,10 +143,29 @@
         "format": "uuid"
       },
       "timestamp": { "type": "string", "format": "date-time" },
-      "mode": { 
+      "operationalState": { 
         "description": "Current action the robot is performing",
         "type": "string",
         "enum": ["navigating", "idle", "disabled", "offline", "charging", "waiting", "loadingUnloading", "manualOveride"] 
+      },
+      "location": { 
+        "description": "Current Location of AMR",
+        "$ref": "#/definitions/location" 
+      },
+      "velocity": { 
+        "description": "Current velocity of AMR",
+        "type": "object",
+        "required": ["linear"],
+        "properties": {
+          "linear": { 
+            "description": "Linear velocity in m/s in heading direction, forward is postive",
+            "type": "number" 
+          },
+          "angular" : { 
+            "description": "Angular velocity in quaternions per second",
+            "$ref": "#/definitions/quaternion" 
+          }
+        }
       },
       "batteryPercentage" : {
         "description": "Percentage of battery remaining",
@@ -139,81 +183,38 @@
         "type": "number",
         "minimum": 0,
         "inclusiveMaximum": 100
+      },
+      "errorCodes" : {
+        "description": "List of current error states - should be omitted for normal operation",
+        "type": "array",
+        "items": {             
+          "type": "string"
+        },
+        "uniqueItems": true
+      },       
+      "destinations" : {
+        "description": "Target destination(s) of AGV",
+        "type": "array",
+        "items": {             
+          "$ref": "#/definitions/predictedLocation"
+        },
+        "maxItems": 10,
+        "uniqueItems": true
+      },
+      "path" : {
+        "description": "Short term path of AGV ~10 sec",
+        "type": "array",
+        "items": {             
+          "$ref": "#/definitions/predictedLocation"
+        },
+        "maxItems": 10,
+        "uniqueItems": true
       }
     }
   },
 
-  "locationReport": {
-    "type": "object",
-    "location": { 
-      "required": ["uuid", "timestamp", "location" ],
-      "properties": {
-        "uuid": {
-          "description": "UUID specified in the identityAndCapability message",
-          "type": "string",
-          "format": "uuid"
-        },
-        "timestamp": { "type": "string", "format": "date-time" },
-        "mode": { 
-          "type": "string",
-          "enum": ["navigating", "idle", "disabled", "offline", "charging", "waiting", "loadingUnloading", "manualOveride"] 
-        },
-        "location": { 
-          "description": "Current Location of AMR",
-          "$ref": "#/definitions/location" 
-        }
-      }
-    },
-    "velocity": { 
-      "description": "Current velocity of AMR",
-      "type": "object",
-      "required": ["linear"],
-      "properties": {
-        "linear": { 
-          "description": "Linear veloicty in m/s in heading direction, forward is postive",
-          "type": "number" 
-        },
-        "pitch": { 
-          "description": "Anglular veloicty in rad/s, clockwise is positive",
-          "type": "number" 
-        },
-        "yaw": { 
-          "description": "Anglular veloicty in rad/s, clockwise is positive",
-          "type": "number" 
-        },
-        "roll": { 
-          "description": "Anglular veloicty in rad/s, clockwise is positive",
-          "type": "number"
-        } 
-      }
-    },
-    "destinations" : {
-      "description": "Target destination(s) of AGV",
-      "type": "array",
-      "items": {             
-        "type": "object",
-        "required": ["timestamp", "location"],
-        "properties": {
-          "timestamp": { "type": "string", "format": "date-time" },
-          "location": {"$ref": "#/definitions/location" }
-        }
-      },
-      "maxItems": 10,
-      "uniqueItems": true
-    },
-    "path" : {
-      "description": "Short term path of AGV ~10 sec",
-      "type": "array",
-      "items": {             
-        "type": "object",
-        "required": ["timestamp", "location"],
-        "properties": {        
-          "timestamp": { "type": "string", "format": "date-time" },
-          "location": {"$ref": "#/definitions/location" }
-        }
-      },
-      "maxItems": 10,
-      "uniqueItems": true
-    }
-  }
+  "oneOf": [
+    { "$ref": "#/identityReport" },
+    { "$ref": "#/statusReport" }
+  ]
 }
