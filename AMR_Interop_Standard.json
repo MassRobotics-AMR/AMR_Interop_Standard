@@ -16,11 +16,14 @@
     "location": {
       "description": "Location of an object or AMR",
       "type": "object",
-      "required": ["x", "y", "z", "angle", "planarDatum"],
+      "required": ["x", "y", "angle", "planarDatum"],
       "properties": {
         "x": { "type": "number" },
         "y": { "type": "number" },
-        "z": { "type": "number" },
+        "z": { 
+          "type": "number", 
+          "default" : 0
+        },
         "angle" : { "$ref": "#/definitions/quaternion" },
         "planarDatum": { 
           "description": "Id of planarDatum AMR is referencing",
@@ -32,7 +35,7 @@
     "predictedLocation": {
       "description": "Predicted future location of an object or AMR",
       "type": "object",
-      "required": ["timestamp", "x", "y", "z", "angle"],
+      "required": ["timestamp", "x", "y", "angle"],
       "properties": {
         "timestamp": { 
           "description": "Predicted UTC time AMR will reach this location",
