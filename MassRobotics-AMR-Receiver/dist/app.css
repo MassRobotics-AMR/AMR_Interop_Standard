@@ -1,0 +1,79 @@
+body {
+  background-color: white;
+  color: #535353;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 25px;
+  margin: 0px;
+  text-align: center; }
+
+input, select {
+  font-size: 25px;
+  width: 275px; }
+
+.error {
+  color: red; }
+
+.topbar .title {
+  background-color: #88b73c;
+  text-align: center;
+  color: white;
+  padding: 20px 0px;
+  margin: 0px;
+  width: 100vw; }
+
+.topbar .navbar {
+  background-color: #88b73c;
+  text-align: center;
+  color: white;
+  margin: 0px;
+  padding-top: 10px;
+  height: 30px; }
+  .topbar .navbar a {
+    color: #f4f4f4;
+    font-size: 18px;
+    padding: 6px 20px;
+    text-decoration: none;
+    line-height: 30px;
+    width: 170px; }
+    .topbar .navbar a:not(:first-of-type) {
+      border-left: 2px #7aa436 solid; }
+
+.home {
+  text-align: center; }
+  .home .content {
+    margin: auto; }
+  .home .group-header {
+    font-size: 42px; }
+  .home .group {
+    margin: 50px 0px; }
+  .home .title {
+    font-size: 32px; }
+  .home .valid {
+    color: green; }
+  .home .not-valid {
+    color: red; }
+  .home .message {
+    font-size: 18px;
+    background-color: #ece9e9;
+    width: fit-content;
+    min-width: 500px;
+    margin: auto;
+    margin-top: 15px;
+    padding: 10px; }
+  .home button {
+    margin: 15px;
+    vertical-align: middle; }
+  .home .primary-button {
+    background-color: #eea320;
+    font-size: 30px;
+    color: white;
+    padding: 15px;
+    width: 175px;
+    border: none;
+    border-radius: 20px; }
+  .home pre {
+    text-align: left; }
+  .home .message-code {
+    margin: auto; }
+  .home .message-header {
+    margin: 10px; }

@@ -1,0 +1,120 @@
+$GREEN_COLOR: #88b73c;
+$GREY_COLOR: #f4f4f4;
+$DARK_GREY_COLOR: darken($color: $GREY_COLOR, $amount: 20);
+
+body {
+  background-color: white;
+  color: #535353;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 25px;
+  margin: 0px;
+  text-align: center;
+}
+
+input, select {
+  font-size: 25px;
+  width: 275px;
+}
+
+.error {
+  color: red;
+}
+
+.topbar {
+
+  .title {
+    background-color: $GREEN_COLOR;
+    text-align: center;
+    color: white;
+    padding: 20px 0px;
+    margin: 0px;
+    width: 100vw;
+  }
+
+  .navbar {
+    background-color: $GREEN_COLOR;
+    text-align: center;
+    color: white;
+    margin: 0px;
+    padding-top: 10px;
+    height: 30px;
+
+    a {
+      &:not(:first-of-type) {
+        border-left: 2px darken($GREEN_COLOR, 5) solid;
+      }
+      color: $GREY_COLOR;
+      font-size: 18px;
+      padding: 6px 20px;
+      text-decoration: none;
+      line-height: 30px;
+      width: 170px;
+
+    }
+  }
+}
+
+.home {
+  text-align: center;
+
+  .content {
+    margin: auto;
+  }
+
+  .group-header {
+    font-size: 42px;
+  }
+
+  .group {
+    margin: 50px 0px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .valid {
+    color: green;
+  }
+
+  .not-valid {
+    color: red;
+  }
+
+  .message {
+    font-size: 18px;
+    background-color: rgb(236, 233, 233);
+    width: fit-content;
+    min-width: 500px;
+    margin: auto;
+    margin-top: 15px;
+    padding: 10px;
+  }
+
+  button {
+    margin: 15px;
+    vertical-align: middle;
+  }
+
+  .primary-button {
+    background-color: #eea320;
+    font-size: 30px;
+    color: white;
+    padding: 15px;
+    width: 175px;
+    border: none;
+    border-radius: 20px;
+  }
+
+  pre {
+    text-align: left;
+  }
+
+  .message-code {
+    margin: auto;
+  }
+
+  .message-header {
+    margin: 10px;
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "name": "MassRobotics-AMR-Receiver",
+  "version": "0.1.0",
+  "description": "Application to validate the schema of websocket messages",
+  "scripts": {
+    "install-all": "npm install; gulp build;",
+    "install-server": "npm install --only=prod",
+    "start": "node server/app.js"
+  },
+  "devDependencies": {
+    "aliasify": "2.1.0",
+    "backbone-torso": "0.8.2",
+    "browser-sync": "2.18.13",
+    "browserify": "14.4.0",
+    "color-log": "0.0.2",
+    "envify": "4.1.0",
+    "gulp": "3.9.1",
+    "gulp-concat-util": "0.5.2",
+    "gulp-cssmin": "0.1.7",
+    "gulp-load-plugins": "0.7.1",
+    "gulp-notify": "2.2.0",
+    "gulp-rimraf": "0.1.1",
+    "gulp-sass": "2.0.4",
+    "gulp-sourcemaps": "1.5.2",
+    "gulp-strip-debug": "1.0.2",
+    "gulp-uglify-es": "1.0.4",
+    "gulp-util": "3.0.6",
+    "handlebars": "3.0.0",
+    "hbsfy": "2.7.0",
+    "jquery": "3.4.1",
+    "run-sequence": "2.2.0",
+    "vinyl-buffer": "1.0.0",
+    "vinyl-source-stream": "1.1.0",
+    "watchify": "3.9.0"
+  },
+  "aliasify": {
+    "aliases": {
+      "torso": "backbone-torso",
+      "jquery": "backbone-torso/node_modules/jquery",
+      "remote-chef": "../../remote_chef"
+    }
+  },
+  "engines": {
+    "node": "6.7.0"
+  },
+  "dependencies": {
+    "ajv": "8.0.1",
+    "body-parser": "1.18.0",
+    "express": "4.15.4",
+    "express-ws": "4.0.0",
+    "underscore": "1.12.0"
+  }
+}

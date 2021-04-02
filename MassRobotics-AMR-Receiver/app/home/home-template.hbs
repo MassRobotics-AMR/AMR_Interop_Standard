@@ -1,0 +1,40 @@
+{{>navbar title="Websocket Schema Validator"}}
+
+<div class="content">
+  <div class="group">
+    <button class="primary-button test-message">Send Test Message</button>
+    <button class="primary-button clear-messages">Clear Messages</button>
+    <div class="messages">
+      {{#each messages}}
+        <div class="message">
+          <div class="message-header">
+            Status:
+          </div>
+          {{#if isValid}}
+            <div class="valid">
+              VALID
+            </div>
+          {{else}}
+            <div class="not-valid">
+              NOT VALID
+            </div>
+            <div class="message-header">
+              Errors:
+            </div>
+            {{#each errors}}
+              <div class="error">
+                <pre><code>{{json this}}</code></pre>
+              </div>
+            {{/each}}
+          {{/if}}
+          <div class="message-header">
+            Message:
+          </div>
+          <div class="message-code">
+            <pre><code>{{#eq errors.type 'MalformedJSON'}}{{message}}{{else}}{{json message}}{{/eq}}</code></pre>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
