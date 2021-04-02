@@ -44,7 +44,10 @@
         },
         "x": { "type": "number" },
         "y": { "type": "number" },
-        "z": { "type": "number" },
+        "z": { 
+          "type": "number", 
+          "default" : 0
+        },
         "angle" : { "$ref": "#/definitions/quaternion" },
         "planarDatumUUID": { 
           "description": "Only necessary if different from AMRs current planarDatum",
@@ -77,10 +80,12 @@
         "properties": {
           "x": { "type": "number" },
           "y": { "type": "number" },
-          "z": { "type": "number" }
+          "z": { 
+            "type": "number", 
+            "default" : 0
+          }
         }
       },
-
       "maxSpeed": { 
         "description": "Max robot speed in m/s",
         "type": "number" 
@@ -126,7 +131,10 @@
         "properties": {
           "x": { "type": "number" },
           "y": { "type": "number" },
-          "z": { "type": "number" }
+          "z": { 
+            "type": "number", 
+            "default" : 0
+          }
         }
       },
       "cargoMaxWeight": { 
