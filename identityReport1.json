@@ -1,0 +1,11 @@
+{
+	"uuid": "6948DF80-14BD-4E04-8842-7668D9C001F5",
+    "timestamp": "2012-04-21T18:25:43-05:00",
+    "manufacturerName": "Mass Robotics AMR",
+    "robotModel" : "AMR-01",
+    "robotSerialNumber" : "0000001",
+    "baseRobotEnvelope" : {
+      "x" : 0.5,
+      "y" : 1
+     }
+}
