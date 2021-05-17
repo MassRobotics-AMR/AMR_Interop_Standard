@@ -22,14 +22,14 @@ async def sendMessage():
     identity["uuid"] = str(uid)
 
     # Attach a timestamp
-    identity["timestamp"] = datetime.now().strftime("%Y-%m-%dT%H:%M:%S%z")
+    identity["timestamp"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S%z")
     
     # Send the identity message once
     await websocket.send(json.dumps(identity))
 
     status = {"uuid": str(uid)}
     while True:
-      status["timestamp"] = datetime.now().strftime("%Y-%m-%dT%H:%M:%S%z")
+      status["timestamp"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S%z")
 
       # The following information would need to be pulled out in a vendor-specific way, for this example it is just hard-coded
       # Get the current operational state and put it in the status message

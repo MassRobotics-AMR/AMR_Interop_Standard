@@ -1,6 +1,4 @@
 {
-  "$schema": "http://json-schema.org/draft/2020-12/schema#",
-
   "definitions": {
     "quaternion": {
       "description": "Quaternion representation of an angle",
