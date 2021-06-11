@@ -16,7 +16,7 @@ OPERATIONAL_STATES = ["navigating", "idle", "disabled", "offline", "charging", "
 async def sendMessage(uri):
   async with websockets.connect(uri) as websocket:
     # These could come from a configuration file or environment variables or any other source, but they are assumed not to change!
-    identity = {"manufacturerName": "Mass Robotics AMRs", "robotModel": "AMR-01", "robotSerialNumber": "0000001", "baseRobotEnvelope": {"x": 0.5, "y": 1}}
+    identity = {"manufacturerName": "Mass Robotics AMR", "robotModel": "AMR-01", "robotSerialNumber": "0000001", "baseRobotEnvelope": {"x": 0.5, "y": 1}}
 
     # Generate a uuid that will be consistent for this robot
     m = hashlib.md5()
