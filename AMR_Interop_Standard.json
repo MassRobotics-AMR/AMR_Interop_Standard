@@ -155,7 +155,7 @@
       "operationalState": { 
         "description": "Current action the robot is performing",
         "type": "string",
-        "enum": ["navigating", "idle", "disabled", "offline", "charging", "waiting", "loadingUnloading", "manualOveride"] 
+        "enum": ["navigating", "idle", "disabled", "offline", "charging", "waitingHumanEvent", "waitingExternalEvent", "waitingInternalEvent", "manualOverride"] 
       },
       "location": { 
         "description": "Current Location of AMR",
