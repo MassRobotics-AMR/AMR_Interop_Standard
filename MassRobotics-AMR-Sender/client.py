@@ -57,24 +57,24 @@ async def sendMessage(uri):
 
       # Generate a random location, simulating that the AMR moves in circles
       r = 20
-      angle = random.choice([
+      pose = random.choice([
         { "x": 0., "y": 0., "z": 0.087, "w": 0.996 },
         { "x": 0., "y": 0., "z": -0.131, "w": 0.991 }
       ])
-      status["location"] = {"x":  math.cos(now) * r, "y": math.sin(now) * r, "z": 0, "angle": angle, "planarDatum": "4B8302DA-21AD-401F-AF45-1DFD956B80B5"}
+      status["location"] = {"x":  math.cos(now) * r, "y": math.sin(now) * r, "z": 0, "pose": pose, "planarDatum": "4B8302DA-21AD-401F-AF45-1DFD956B80B5"}
 
       # Generate random paths and destinations
       side = random.choice([10, 20, 30])
       status["path"] = [
-        {"timestamp": (nowDt+timedelta(seconds=10)).strftime("%Y-%m-%dT%H:%M:%S%z"), "x": 0, "y": 0, "angle": { "x": 0., "y": 0., "z": 0., "w": 1 }, "planarDatumUUID": "4B8302DA-21AD-401F-AF45-1DFD956B80B5"},
-        {"timestamp": (nowDt+timedelta(seconds=20)).strftime("%Y-%m-%dT%H:%M:%S%z"), "x": 0, "y": side, "angle": { "x": 0., "y": 0., "z": 0., "w": 1 }, "planarDatumUUID": "4B8302DA-21AD-401F-AF45-1DFD956B80B5"},
-        {"timestamp": (nowDt+timedelta(seconds=30)).strftime("%Y-%m-%dT%H:%M:%S%z"), "x": side, "y": side, "angle": { "x": 0., "y": 0., "z": 0., "w": 1 }, "planarDatumUUID": "4B8302DA-21AD-401F-AF45-1DFD956B80B5"},
-        {"timestamp": (nowDt+timedelta(seconds=40)).strftime("%Y-%m-%dT%H:%M:%S%z"), "x": side, "y": 0, "angle": { "x": 0., "y": 0., "z": 0., "w": 1 }, "planarDatumUUID": "4B8302DA-21AD-401F-AF45-1DFD956B80B5"},
-        {"timestamp": (nowDt+timedelta(seconds=50)).strftime("%Y-%m-%dT%H:%M:%S%z"), "x": 0, "y": 0, "angle": { "x": 0., "y": 0., "z": 0., "w": 1 }, "planarDatumUUID": "4B8302DA-21AD-401F-AF45-1DFD956B80B5"}
+        {"timestamp": (nowDt+timedelta(seconds=10)).strftime("%Y-%m-%dT%H:%M:%S%z"), "x": 0, "y": 0, "pose": { "x": 0., "y": 0., "z": 0., "w": 1 }, "planarDatumUUID": "4B8302DA-21AD-401F-AF45-1DFD956B80B5"},
+        {"timestamp": (nowDt+timedelta(seconds=20)).strftime("%Y-%m-%dT%H:%M:%S%z"), "x": 0, "y": side, "pose": { "x": 0., "y": 0., "z": 0., "w": 1 }, "planarDatumUUID": "4B8302DA-21AD-401F-AF45-1DFD956B80B5"},
+        {"timestamp": (nowDt+timedelta(seconds=30)).strftime("%Y-%m-%dT%H:%M:%S%z"), "x": side, "y": side, "pose": { "x": 0., "y": 0., "z": 0., "w": 1 }, "planarDatumUUID": "4B8302DA-21AD-401F-AF45-1DFD956B80B5"},
+        {"timestamp": (nowDt+timedelta(seconds=40)).strftime("%Y-%m-%dT%H:%M:%S%z"), "x": side, "y": 0, "pose": { "x": 0., "y": 0., "z": 0., "w": 1 }, "planarDatumUUID": "4B8302DA-21AD-401F-AF45-1DFD956B80B5"},
+        {"timestamp": (nowDt+timedelta(seconds=50)).strftime("%Y-%m-%dT%H:%M:%S%z"), "x": 0, "y": 0, "pose": { "x": 0., "y": 0., "z": 0., "w": 1 }, "planarDatumUUID": "4B8302DA-21AD-401F-AF45-1DFD956B80B5"}
       ]
       status["destinations"] = [
-        {"timestamp": (nowDt+timedelta(seconds=30)).strftime("%Y-%m-%dT%H:%M:%S%z"), "x": side, "y": side, "angle": { "x": 0., "y": 0., "z": 0., "w": 1 }, "planarDatumUUID": "4B8302DA-21AD-401F-AF45-1DFD956B80B5"},
-        {"timestamp": (nowDt+timedelta(seconds=50)).strftime("%Y-%m-%dT%H:%M:%S%z"), "x": 0, "y": 0, "angle": { "x": 0., "y": 0., "z": 0., "w": 1 }, "planarDatumUUID": "4B8302DA-21AD-401F-AF45-1DFD956B80B5"}
+        {"timestamp": (nowDt+timedelta(seconds=30)).strftime("%Y-%m-%dT%H:%M:%S%z"), "x": side, "y": side, "pose": { "x": 0., "y": 0., "z": 0., "w": 1 }, "planarDatumUUID": "4B8302DA-21AD-401F-AF45-1DFD956B80B5"},
+        {"timestamp": (nowDt+timedelta(seconds=50)).strftime("%Y-%m-%dT%H:%M:%S%z"), "x": 0, "y": 0, "pose": { "x": 0., "y": 0., "z": 0., "w": 1 }, "planarDatumUUID": "4B8302DA-21AD-401F-AF45-1DFD956B80B5"}
       ]
 
       # Send the report message

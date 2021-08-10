@@ -1,7 +1,7 @@
 {
   "definitions": {
     "quaternion": {
-      "description": "Quaternion representation of an angle",
+      "description": "Quaternion representation of an pose",
       "type": "object",
       "required": ["x", "y", "z", "w"],
       "properties": {
@@ -14,7 +14,7 @@
     "location": {
       "description": "Location of an object or AMR",
       "type": "object",
-      "required": ["x", "y", "angle", "planarDatum"],
+      "required": ["x", "y", "pose", "planarDatum"],
       "properties": {
         "x": { "type": "number" },
         "y": { "type": "number" },
@@ -22,8 +22,8 @@
           "type": "number", 
           "default" : 0
         },
-        "angle" : { "$ref": "#/definitions/quaternion" },
         "planarDatum": { 
+        "pose" : { "$ref": "#/definitions/quaternion" },
           "description": "Id of planarDatum AMR is referencing",
           "type": "string",
           "format": "uuid"
@@ -33,7 +33,7 @@
     "predictedLocation": {
       "description": "Predicted future location of an object or AMR",
       "type": "object",
-      "required": ["timestamp", "x", "y", "angle"],
+      "required": ["timestamp", "x", "y", "pose"],
       "properties": {
         "timestamp": { 
           "description": "Predicted UTC time AMR will reach this location",
@@ -46,7 +46,7 @@
           "type": "number", 
           "default" : 0
         },
-        "angle" : { "$ref": "#/definitions/quaternion" },
+        "pose" : { "$ref": "#/definitions/quaternion" },
         "planarDatumUUID": { 
           "description": "Only necessary if different from AMRs current planarDatum",
           "type": "string",
