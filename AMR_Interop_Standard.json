@@ -11,6 +11,20 @@
         "w": { "type": "number" }
       }
     },
+    "datnumReferencePoint": {
+      "description": "A Datum Reference Point",
+      "type": "object",
+      "required": ["id", "name", "x", "y"],
+      "properties": {
+        "id": {
+          "type": "string",
+	  "format": "uuid"
+        },
+	"name": { "type": "string" },
+        "x": { "type": "number" },
+	"y": { "type": "number" }
+      }
+    },
     "location": {
       "description": "Location of an object or AMR",
       "type": "object",
