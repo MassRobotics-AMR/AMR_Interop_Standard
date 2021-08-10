@@ -25,6 +25,25 @@
 	"y": { "type": "number" }
       }
     },
+    "planarDatum": {
+      "description": "Planar Datum",
+      "type": "object",
+      "required": ["id", "name", "level", "datumReferencePoints"],
+      "properties": {
+        "id": { "type": "string" },
+	 "name": { "type": "string" },
+	 "level": { "type": "integer" },
+	 "datumReferencePoints": {
+          "description": "Datum Reference Point ids",
+          "type": "array",
+          "items": {
+            "type": "string",
+	     "format": "uuid"
+          },
+          "minItems": 2
+	 }
+      }
+    },
     "location": {
       "description": "Location of an object or AMR",
       "type": "object",
