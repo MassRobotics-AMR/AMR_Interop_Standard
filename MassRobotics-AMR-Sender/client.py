@@ -12,7 +12,7 @@ import sys
 from datetime import datetime, timezone, timedelta
 
 OPERATIONAL_STATES = ["navigating", "idle", "disabled", "offline", "charging",
-  "waitingHumanEvent", "waitingExternalEvent", "waitingInternalEvent", "manualOverride"]
+  "waitingHumanEvent", "waitingExternalEvent", "waitingInternalEvent", "manualMode"]
 
 async def sendMessage(uri):
   async with websockets.connect(uri) as websocket:
