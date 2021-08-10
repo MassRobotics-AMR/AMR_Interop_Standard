@@ -194,6 +194,14 @@
         "description": "Current Location of AMR",
         "$ref": "#/definitions/location" 
       },
+      "errorCodes" : {
+        "description": "List of current error states - should be omitted for normal operation",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "uniqueItems": true
+      },
       "velocity": { 
         "description": "Current velocity of AMR",
         "type": "object",
@@ -226,14 +234,6 @@
         "minimum": 0,
         "inclusiveMaximum": 100
       },
-      "errorCodes" : {
-        "description": "List of current error states - should be omitted for normal operation",
-        "type": "array",
-        "items": {             
-          "type": "string"
-        },
-        "uniqueItems": true
-      },       
       "destinations" : {
         "description": "Target destination(s) of AGV",
         "type": "array",
