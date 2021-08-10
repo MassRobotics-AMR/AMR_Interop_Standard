@@ -11,7 +11,7 @@
         "w": { "type": "number" }
       }
     },
-    "datnumReferencePoint": {
+    "datumReferencePoint": {
       "description": "A Datum Reference Point",
       "type": "object",
       "required": ["id", "name", "x", "y"],
