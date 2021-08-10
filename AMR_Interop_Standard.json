@@ -217,6 +217,15 @@
           }
         }
       },
+      "nextWorkingLocations" : {
+        "description": "Next working location(s). It is recommended that at least the destination is provided",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/predictedLocation"
+        },
+        "maxItems": 10,
+        "uniqueItems": true
+      },
       "batteryPercentage" : {
         "description": "Percentage of battery remaining",
         "type": "number",
@@ -233,15 +242,6 @@
         "type": "number",
         "minimum": 0,
         "inclusiveMaximum": 100
-      },
-      "destinations" : {
-        "description": "Target destination(s) of AGV",
-        "type": "array",
-        "items": {             
-          "$ref": "#/definitions/predictedLocation"
-        },
-        "maxItems": 10,
-        "uniqueItems": true
       },
       "path" : {
         "description": "Short term path of AGV ~10 sec",
