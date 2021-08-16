@@ -1,11 +1,15 @@
-Installation
+## Installation
 
 Requires python 3, tested on 3.6.9.
 
-pip install websockets
+```sh
+$ pip install websockets
+```
 
 -----------------------
-Run Client
+## Run Client
 
+```sh
 $ cd /path/to/project
 $ python client.py
+```
