@@ -1,7 +1,7 @@
 {
   "name": "MassRobotics-AMR-Receiver",
-  "version": "0.1.0",
-  "description": "Application to validate the schema of websocket messages",
+  "version": "0.2.0",
+  "description": "Application to validate the schema of websocket messages and mqtt messages",
   "scripts": {
     "install-all": "npm install; gulp build;",
     "install-server": "npm install --only=prod",
@@ -48,6 +48,7 @@
     "body-parser": "1.18.0",
     "express": "4.15.4",
     "express-ws": "4.0.0",
+    "mqtt": "4.2.8",
     "underscore": "1.12.0"
   }
 }

@@ -6,8 +6,10 @@ const Ajv = require("ajv");
 const ajv = new Ajv({strictSchema: false});
 let validate = ajv.compile(schema);
 let UIsockets = {};
+const mqtt = require('mqtt');
+var mqtt_client;
 
-module.exports = function(app) {
+module.exports = function(app, mqtt_broker = "mosquitto") {
   app.use(bodyParser.json());
 
   app.ws('/ui', function(ws, req) {
@@ -43,6 +45,25 @@ module.exports = function(app) {
   app.get('/test-message', function(req, res) {
     res.send(testMessage);
   });
+
+  mqtt_client = mqtt.connect('mqtt://' + mqtt_broker);
+  mqtt_client.on('connect', function() {
+    mqtt_client.subscribe('identityReport', function (err) {
+      if (err) {
+	console.log("Error: identityReport subscribe");
+      }
+    });
+    mqtt_client.subscribe('statusReport', function (err) {
+      if (err) {
+	console.log("Error: statusReport subscribe");
+      }
+    });
+  });
+
+  mqtt_client.on('message', function (topic, message) {
+    console.log("subscribe : " + topic);
+    processMessage(message);
+  })
 };
 
 function processMessage(msg) {
@@ -75,6 +96,8 @@ function processMessage(msg) {
       errors: errors
     });
   });
+  // Issuing mqtt protocol is not necessary,
+  // because it is publish/subscribe type.
 }
 
 function sendMessage(ws, data = {}) {
