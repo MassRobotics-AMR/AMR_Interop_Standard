@@ -9,7 +9,7 @@ host = "localhost"
 port = 1883
 keepalive = 60
 
-with open('./AMR_Interop_Standard.json') as file_obj:
+with open('../AMR_Interop_Standard.json') as file_obj:
     json_schema = json.load(file_obj)
 
 def on_message(mqttc, obj, msg):
