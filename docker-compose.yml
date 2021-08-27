@@ -7,6 +7,8 @@ services:
       context: .
       dockerfile: Dockerfile_Receiver
     container_name: receiver
+    depends_on:
+      - "mqtt"
     ports:
       - "3000:3000"
     volumes:
@@ -27,5 +29,14 @@ services:
     container_name: mqtt
     ports:
       - "1883:1883"
+  publisher:
+    image: publisher
+    build:
+      context: .
+      dockerfile: Dockerfile_Publisher
+    container_name: publisher
+    depends_on:
+      - "receiver"
+    tty: true
 volumes:
   node_modules:

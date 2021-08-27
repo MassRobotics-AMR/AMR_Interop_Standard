@@ -11,6 +11,7 @@ import json
 import random
 import math
 import time
+import sys
 
 OPERATIONAL_STATES = ["navigating", "idle", "disabled", "offline", "charging",
   "waitingHumanEvent", "waitingExternalEvent", "waitingInternalEvent", "manualOverride"]
@@ -90,6 +91,8 @@ async def sendMessage(host, port, keepalive):
 
 if __name__ == '__main__':
     host = "localhost"
+    if len(sys.argv) > 1:
+        host = sys.argv[1]
     port = 1883
     keepalive = 60
     asyncio.get_event_loop().run_until_complete(sendMessage(host, port, keepalive))
