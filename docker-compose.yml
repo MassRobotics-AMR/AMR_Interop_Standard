@@ -21,5 +21,11 @@ services:
     depends_on:
       - "receiver"
     tty: true
+  mqtt:
+    build: ./mosquitto
+    hostname: mosquitto
+    container_name: mqtt
+    ports:
+      - "1883:1883"
 volumes:
   node_modules:
