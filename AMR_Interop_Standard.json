@@ -180,7 +180,7 @@
         "description": "Percentage of battery remaining",
         "type": "number",
         "minimum": 0,
-	"maximum": 100
+        "maximum": 100
       },
       "remainingRunTime" : {
         "description": "Estimated remaining runtime in hours",
@@ -191,7 +191,7 @@
         "description": "Percentage of capacity still available",
         "type": "number",
         "minimum": 0,
-	"maximum": 100
+        "maximum": 100
       },
       "errorCodes" : {
         "description": "List of current error states - should be omitted for normal operation",
