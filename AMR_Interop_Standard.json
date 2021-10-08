@@ -26,7 +26,8 @@
         "planarDatum": { 
           "description": "Id of planarDatum AMR is referencing",
           "type": "string",
-          "format": "uuid"
+          "format": "uuid",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
         }
       }
     },
@@ -50,7 +51,8 @@
         "planarDatumUUID": { 
           "description": "Only necessary if different from AMRs current planarDatum",
           "type": "string",
-          "format": "uuid"
+          "format": "uuid",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
         }
       }
     }
@@ -63,7 +65,8 @@
       "uuid": {
         "description": "UUID specified by RFC4122 that all subsequent messages should reference",
         "type": "string",
-        "format": "uuid"
+        "format": "uuid",
+        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
       },
       "timestamp": { "type": "string", "format": "date-time" },
       "manufacturerName": { "type": "string" },
@@ -149,7 +152,8 @@
       "uuid": {
         "description": "UUID specified in the identityAndCapability message",
         "type": "string",
-        "format": "uuid"
+        "format": "uuid",
+        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
       },
       "timestamp": { "type": "string", "format": "date-time" },
       "operationalState": { 
