@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  receiver:
+    image: receiver
+    build:
+      context: .
+      dockerfile: Dockerfile_Receiver
+    container_name: receiver
+    ports:
+      - "3000:3000"
+    volumes:
+      - node_modules:/app/MassRobotics-AMR-Receiver/node_modules
+    tty: true
+  sender:
+    image: sender
+    build:
+      context: .
+      dockerfile: Dockerfile_Sender
+    container_name: sender
+    depends_on:
+      - "receiver"
+    tty: true
+volumes:
+  node_modules:

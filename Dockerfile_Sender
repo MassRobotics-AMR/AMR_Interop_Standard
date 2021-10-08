@@ -1,0 +1,7 @@
+FROM python:3.6.9
+
+COPY ./MassRobotics-AMR-Sender /app
+WORKDIR /app
+RUN pip install websockets
+
+ENTRYPOINT python client.py "ws://receiver:3000"
