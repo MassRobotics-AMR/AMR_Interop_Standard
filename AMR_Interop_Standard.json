@@ -9,7 +9,8 @@
         "y": { "type": "number" },
         "z": { "type": "number" },
         "w": { "type": "number" }
-      }
+      },
+      "additionalProperties": false
     },
     "location": {
       "description": "Location of an object or AMR",
@@ -29,7 +30,8 @@
           "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "predictedLocation": {
       "description": "Predicted future location of an object or AMR",
@@ -54,7 +56,8 @@
           "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
         }
-      }
+      }, 
+      "additionalProperties": false
     }
   },
 
@@ -85,7 +88,8 @@
             "type": "number", 
             "default" : 0
           }
-        }
+        },
+        "additionalProperties": false
       },
       "maxSpeed": { 
         "description": "Max robot speed in m/s",
@@ -136,13 +140,15 @@
             "type": "number", 
             "default" : 0
           }
-        }
+        },
+        "additionalProperties": false
       },
       "cargoMaxWeight": { 
         "description": "Max weight of cargo in kg",
         "type": "string"
       }
-    }
+    },
+    "additionalProperties": false
   },
 
   "statusReport": {
@@ -178,7 +184,8 @@
             "description": "Angular velocity in quaternions per second",
             "$ref": "#/definitions/quaternion" 
           }
-        }
+        },
+        "additionalProperties": false
       },
       "batteryPercentage" : {
         "description": "Percentage of battery remaining",
@@ -223,7 +230,8 @@
         "maxItems": 10,
         "uniqueItems": true
       }
-    }
+    },
+    "additionalProperties": false
   },
 
   "oneOf": [
