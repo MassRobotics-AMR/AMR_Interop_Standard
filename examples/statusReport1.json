@@ -1,16 +1,16 @@
 {
-    "uuid": "6948DF80-14BD-4E04-8842-7668D9C001F5",
-    "timestamp": "2012-04-21T18:25:43-05:00",
-    "operationalState": "navigating",
-    "location" : {
-      "x" : 0.5,
-      "y" : 1,
-      "angle" : {
-        "w" : 0.924,
-        "x" : 0.000,
-        "y" : 0.000,
-        "z" : 0.383
-      },
-      "planarDatum":"4B8302DA-21AD-401F-AF45-1DFD956B80B5"
-   }
+  "uuid": "6948DF80-14BD-4E04-8842-7668D9C001F5",
+  "timestamp": "2012-04-21T18:25:43-05:00",
+  "operationalState": "navigating",
+  "location" : {
+    "x" : 0.5,
+    "y" : 1,
+    "pose" : {
+      "w" : 0.924,
+      "x" : 0.000,
+      "y" : 0.000,
+      "z" : 0.383
+    },
+    "planarDatum":"4B8302DA-21AD-401F-AF45-1DFD956B80B5"
+  }
 }

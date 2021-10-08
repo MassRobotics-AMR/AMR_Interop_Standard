@@ -1,7 +1,7 @@
 {
   "definitions": {
     "quaternion": {
-      "description": "Quaternion representation of an angle",
+      "description": "Quaternion representation of an pose",
       "type": "object",
       "required": ["x", "y", "z", "w"],
       "properties": {
@@ -12,19 +12,52 @@
       },
       "additionalProperties": false
     },
+    "datumReferencePoint": {
+      "description": "A Datum Reference Point",
+      "type": "object",
+      "required": ["id", "name", "x", "y"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": { "type": "string" },
+        "x": { "type": "number" },
+        "y": { "type": "number" }
+      }
+    },
+    "planarDatum": {
+      "description": "Planar Datum",
+      "type": "object",
+      "required": ["id", "name", "level", "datumReferencePoints"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "level": { "type": "integer" },
+        "datumReferencePoints": {
+          "description": "Datum Reference Point ids",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "minItems": 2
+        }
+      }
+    },
     "location": {
       "description": "Location of an object or AMR",
       "type": "object",
-      "required": ["x", "y", "angle", "planarDatum"],
+      "required": ["x", "y", "pose", "planarDatum"],
       "properties": {
         "x": { "type": "number" },
         "y": { "type": "number" },
-        "z": { 
-          "type": "number", 
+        "z": {
+          "type": "number",
           "default" : 0
         },
-        "angle" : { "$ref": "#/definitions/quaternion" },
-        "planarDatum": { 
+        "pose" : { "$ref": "#/definitions/quaternion" },
+        "planarDatum": {
           "description": "Id of planarDatum AMR is referencing",
           "type": "string",
           "format": "uuid",
@@ -36,21 +69,21 @@
     "predictedLocation": {
       "description": "Predicted future location of an object or AMR",
       "type": "object",
-      "required": ["timestamp", "x", "y", "angle"],
+      "required": ["timestamp", "x", "y", "pose"],
       "properties": {
-        "timestamp": { 
+        "timestamp": {
           "description": "Predicted UTC time AMR will reach this location",
-          "type": "string", 
-          "format": "date-time" 
+          "type": "string",
+          "format": "date-time"
         },
         "x": { "type": "number" },
         "y": { "type": "number" },
-        "z": { 
-          "type": "number", 
+        "z": {
+          "type": "number",
           "default" : 0
         },
-        "angle" : { "$ref": "#/definitions/quaternion" },
-        "planarDatumUUID": { 
+        "pose" : { "$ref": "#/definitions/quaternion" },
+        "planarDatumUUID": {
           "description": "Only necessary if different from AMRs current planarDatum",
           "type": "string",
           "format": "uuid",
@@ -74,76 +107,76 @@
       "timestamp": { "type": "string", "format": "date-time" },
       "manufacturerName": { "type": "string" },
       "robotModel": { "type": "string" },
-      "robotSerialNumber": { 
+      "robotSerialNumber": {
         "description": "Unique robot identifier that ideally can be physically linked to the AMR",
         "type": "string" },
-      "baseRobotEnvelope": { 
+      "baseRobotEnvelope": {
         "description": "Footprint of robot based on orientation - centered on current location.",
         "type": "object",
         "required": ["x", "y"],
         "properties": {
           "x": { "type": "number" },
           "y": { "type": "number" },
-          "z": { 
-            "type": "number", 
+          "z": {
+            "type": "number",
             "default" : 0
           }
         },
         "additionalProperties": false
       },
-      "maxSpeed": { 
+      "maxSpeed": {
         "description": "Max robot speed in m/s",
-        "type": "number" 
+        "type": "number"
       },
-      "maxRunTime": { 
+      "maxRunTime": {
         "description": "Estimated Runtime in hours",
         "type": "number"
       },
-      "emergencyContactInformation": { 
+      "emergencyContactInformation": {
         "description": "Emergency Contact - preferrably phone number",
         "type": "string"
       },
-      "chargerType": { 
+      "chargerType": {
         "description": "Type of charger",
         "type": "string"
       },
-      "supportVendorName": { 
+      "supportVendorName": {
         "description": "Vendor that supplied robot",
         "type": "string"
       },
-      "supportVendorContactInformation": { 
+      "supportVendorContactInformation": {
         "description": "Contect information for vendor",
         "type": "string"
       },
-      "productDocumentation": { 
+      "productDocumentation": {
         "description": "Link to product documenation",
         "type": "string",
         "format": "uri"
       },
-      "thumbnailImage": { 
+      "thumbnailImage": {
         "description": "Link to thumbnail graphic stored as PNG",
         "type": "string",
         "format": "uri"
-      },      
-      "cargoType": { 
+      },
+      "cargoType": {
         "description": "Discription of cargo",
         "type": "string"
-      },      
-      "cargoMaxVolume": { 
+      },
+      "cargoMaxVolume": {
         "description": "Max volume of cargo in meters",
         "type": "object",
         "required": ["x", "y"],
         "properties": {
           "x": { "type": "number" },
           "y": { "type": "number" },
-          "z": { 
-            "type": "number", 
+          "z": {
+            "type": "number",
             "default" : 0
           }
         },
         "additionalProperties": false
       },
-      "cargoMaxWeight": { 
+      "cargoMaxWeight": {
         "description": "Max weight of cargo in kg",
         "type": "string"
       }
@@ -162,30 +195,47 @@
         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
       },
       "timestamp": { "type": "string", "format": "date-time" },
-      "operationalState": { 
+      "operationalState": {
         "description": "Current action the robot is performing",
         "type": "string",
-        "enum": ["navigating", "idle", "disabled", "offline", "charging", "waitingHumanEvent", "waitingExternalEvent", "waitingInternalEvent", "manualOverride"] 
+        "enum": ["navigating", "idle", "disabled", "offline", "charging", "waitingHumanEvent", "waitingExternalEvent", "waitingInternalEvent", "manualMode"]
       },
-      "location": { 
+      "location": {
         "description": "Current Location of AMR",
-        "$ref": "#/definitions/location" 
+        "$ref": "#/definitions/location"
       },
-      "velocity": { 
+      "errorCodes" : {
+        "description": "List of current error states - should be omitted for normal operation",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "uniqueItems": true
+      },
+      "velocity": {
         "description": "Current velocity of AMR",
         "type": "object",
         "required": ["linear"],
         "properties": {
-          "linear": { 
+          "linear": {
             "description": "Linear velocity in m/s in heading direction, forward is postive",
-            "type": "number" 
+            "type": "number"
           },
-          "angular" : { 
+          "angular" : {
             "description": "Angular velocity in quaternions per second",
-            "$ref": "#/definitions/quaternion" 
+            "$ref": "#/definitions/quaternion"
           }
         },
         "additionalProperties": false
+      },
+      "nextWorkingLocations" : {
+        "description": "Next working location(s). It is recommended that at least the destination is provided",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/predictedLocation"
+        },
+        "maxItems": 10,
+        "uniqueItems": true
       },
       "batteryPercentage" : {
         "description": "Percentage of battery remaining",
@@ -204,27 +254,10 @@
         "minimum": 0,
         "maximum": 100
       },
-      "errorCodes" : {
-        "description": "List of current error states - should be omitted for normal operation",
-        "type": "array",
-        "items": {             
-          "type": "string"
-        },
-        "uniqueItems": true
-      },       
-      "destinations" : {
-        "description": "Target destination(s) of AGV",
-        "type": "array",
-        "items": {             
-          "$ref": "#/definitions/predictedLocation"
-        },
-        "maxItems": 10,
-        "uniqueItems": true
-      },
       "path" : {
         "description": "Short term path of AGV ~10 sec",
         "type": "array",
-        "items": {             
+        "items": {
           "$ref": "#/definitions/predictedLocation"
         },
         "maxItems": 10,
