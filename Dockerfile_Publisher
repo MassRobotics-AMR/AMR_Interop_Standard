@@ -1,0 +1,7 @@
+FROM python:3.6.9
+
+COPY ./MassRobotics-AMR-MQTT-Client /app
+WORKDIR /app
+RUN pip install paho-mqtt
+
+ENTRYPOINT python publisher.py mqtt
